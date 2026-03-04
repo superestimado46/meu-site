@@ -80,11 +80,11 @@ const Pricing: React.FC = () => {
             
             <ul className="space-y-4 mb-8 flex-1">
               <li className="flex items-center gap-3 text-gray-400">
-                <Check size={18} />
+                <Check size={18} className="text-gray-500 flex-shrink-0" />
                 <span className="text-sm">Curso Completo Simpsons Cash</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
-                <Check size={18} />
+                <Check size={18} className="text-gray-500 flex-shrink-0" />
                 <span className="text-sm">Acesso Vitalício</span>
               </li>
             </ul>
@@ -93,18 +93,18 @@ const Pricing: React.FC = () => {
               href="https://checkout.ticto.app/OBF27819D"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 rounded-xl border border-gray-600 text-white font-bold hover:bg-gray-800 transition-colors text-center block"
+              className="w-full py-3 rounded-xl border border-gray-600 text-white font-bold hover:bg-gray-800 transition-colors text-sm md:text-base text-center block"
             >
               Quero apenas o curso
             </a>
           </div>
 
-          {/* --- OFFER 2: PREMIUM --- */}
+          {/* --- OFFER 2: PREMIUM (fix do botão) --- */}
           <div className="w-full bg-gray-800 rounded-2xl p-6 lg:p-8 border-2 border-yellow-400 flex flex-col transform lg:scale-110 relative z-20 h-full">
             <div className="mb-6 mt-2">
               <h3 className="text-2xl font-bold text-yellow-400 flex items-center gap-2">
                  Completo + Comunidade
-                 <Star size={20} />
+                 <Star size={20} fill="currentColor" />
               </h3>
               <p className="text-sm text-gray-400 mt-2">Acelere seus resultados com o grupo</p>
               <div className="mt-4 flex items-baseline flex-wrap gap-y-2">
@@ -131,14 +131,14 @@ const Pricing: React.FC = () => {
               href="https://checkout.ticto.app/O33C97F03"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 rounded-xl bg-yellow-400 text-black font-extrabold text-lg text-center block"
+              className="w-full py-4 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold text-lg shadow-lg transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 text-center"
             >
               <MessageCircle size={20} />
-              Quero Acesso + Grupo VIP
+              <span>Quero Acesso + Grupo VIP</span>
             </a>
           </div>
 
-          {/* --- OFFER 3: ULTRA --- */}
+          {/* --- OFFER 3: ULTRA (fix do brilho no hover) --- */}
           <div className="w-full bg-gray-900 rounded-2xl p-6 lg:p-8 border border-gray-700 flex flex-col h-full">
             <div className="mb-6">
               <h3 className="text-xl font-bold text-white">Kit Acelerador</h3>
@@ -167,7 +167,8 @@ const Pricing: React.FC = () => {
               href="https://checkout.ticto.app/O357A9DD7"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 rounded-xl border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black font-bold text-center block"
+              className="w-full py-3 rounded-xl border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black font-bold transition-all text-sm md:text-base text-center
+                         hover:shadow-[0_0_28px_rgba(34,211,238,0.45)]"
             >
               Quero Conta Monetizada
             </a>
