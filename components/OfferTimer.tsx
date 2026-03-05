@@ -18,7 +18,7 @@ const OfferTimer: React.FC = () => {
     <section className="py-10 bg-red-600 text-center">
       <div className="container mx-auto px-4">
         <p className="text-white/80 text-sm font-bold uppercase tracking-widest">
-          ⚠️ Oferta expira em
+          ⚠️ Oferta expira em ⚠️
         </p>
 
         <div className="text-5xl md:text-6xl font-black text-white mt-2">
@@ -27,7 +27,7 @@ const OfferTimer: React.FC = () => {
 {/* Mensagem de escassez abaixo do timer */}
 <div className="mt-3 text-center leading-relaxed">
   <p className="text-yellow-300 text-sm md:text-base font-bold animate-pulse">
-     RESTAM APENAS 12 VAGAS COM ESSE DESCONTO
+     restam apenas 12 vagas
   </p>
 
   <p className="text-white/80 text-xs md:text-sm mt-1">
