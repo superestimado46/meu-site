@@ -25,8 +25,7 @@ const OfferTimer: React.FC = () => {
 
       {/* Título */}
       <p className="text-yellow-300 font-semibold text-sm flex items-center justify-center gap-2">
-        OFERTA EXPIRA EM
-        <span className="text-yellow-300 text-base">⚠</span>
+        ⚠ OFERTA EXPIRA EM ⚠
       </p>
 
       {/* Timer */}
