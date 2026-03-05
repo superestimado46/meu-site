@@ -34,10 +34,6 @@ const OfferTimer: React.FC = () => {
     Quando o contador zerar ou as vagas acabarem, o valor volta ao normal.
   </p>
 </div>
-        <p className="text-white/80 mt-3 text-sm">
-          Após o tempo acabar o valor volta ao preço normal.
-        </p>
-      </div>
     </section>
   );
 };
