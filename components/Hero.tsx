@@ -65,11 +65,6 @@ const Hero: React.FC = () => {
 
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative">
 
-            {/* TEXTO ACIMA DO CARROSSEL */}
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20 bg-gray-900/90 border border-gray-700 px-6 py-2 rounded-full text-sm font-bold text-white backdrop-blur-md">
-              🔥 Mais de <span className="text-simpson-yellow">1457</span> alunos já começaram
-            </div>
-
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-simpson-yellow/5 blur-[60px] rounded-full pointer-events-none animate-pulse-slow"></div>
 
             <div
