@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from './components/Hero';
+import ResultsMarquee from './components/ResultsMarquee';
 import Proof from './components/Proof';
 import ProblemSolution from './components/ProblemSolution';
 import Modules from './components/Modules';
@@ -14,6 +15,10 @@ function App() {
     <div className="min-h-screen bg-tiktok-black font-sans antialiased text-white selection:bg-simpson-yellow selection:text-black">
       <main>
         <Hero />
+
+        {/* NOVA SEÇÃO DE RESULTADOS */}
+        <ResultsMarquee />
+
         <Proof />
         <ProblemSolution />
         <Modules />
