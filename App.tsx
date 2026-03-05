@@ -6,7 +6,7 @@ import ProblemSolution from './components/ProblemSolution';
 import Modules from './components/Modules';
 import Bonuses from './components/Bonuses';
 import Pricing from './components/Pricing';
-import FAQ from "./components/FAQ";
+import Faq from "./components/Faq";
 import Guarantee from './components/Guarantee';
 import Summary from './components/Summary';
 import Footer from './components/Footer';
