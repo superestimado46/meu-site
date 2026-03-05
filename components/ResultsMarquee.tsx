@@ -1,32 +1,36 @@
 import React from "react";
 
-import r01 from "@/assets/results/result_01.webp";
-import r02 from "@/assets/results/result_02.webp";
-import r03 from "@/assets/results/result_03.webp";
-import r04 from "@/assets/results/result_04.webp";
-import r05 from "@/assets/results/result_05.webp";
-import r06 from "@/assets/results/result_06.webp";
-import r07 from "@/assets/results/result_07.webp";
-import r08 from "@/assets/results/result_08.webp";
-import r09 from "@/assets/results/result_09.webp";
-import r10 from "@/assets/results/result_10.webp";
-import r11 from "@/assets/results/result_11.webp";
-import r12 from "@/assets/results/result_12.webp";
-
 type Props = {
   title?: string;
   subtitle?: string;
-  speedSeconds?: number;
+  speedSeconds?: number; // quanto maior, mais lento
 };
 
-const results = [r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, r11, r12];
+const fileNames = [
+  "result_01.webp",
+  "result_02.webp",
+  "result_03.webp",
+  "result_04.webp",
+  "result_05.webp",
+  "result_06.webp",
+  "result_07.webp",
+  "result_08.webp",
+  "result_09.webp",
+  "result_10.webp",
+  "result_11.webp",
+  "result_12.webp",
+];
+
+// funciona no Vite/Netlify
+const getSrc = (name: string) => new URL(`../assets/results/${name}`, import.meta.url).href;
 
 export default function ResultsMarquee({
   title = "Resultados Reais",
   subtitle = "Mais de 800 alunos já começaram com o Simpsons Cash",
-  speedSeconds = 30,
+  speedSeconds = 28,
 }: Props) {
-  const loop = [...results, ...results];
+  const images = fileNames.map(getSrc);
+  const loop = [...images, ...images];
 
   return (
     <section className="py-20 bg-black">
@@ -39,22 +43,24 @@ export default function ResultsMarquee({
         </div>
 
         <div className="relative overflow-hidden">
+          {/* fade nas laterais */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-black to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-black to-transparent z-10" />
 
+          {/* ✅ min-w-max + flex-nowrap = mobile não “quebra” */}
           <div
-            className="flex gap-6 items-center will-change-transform"
+            className="flex flex-nowrap w-max gap-6 items-center will-change-transform"
             style={{ animation: `marquee ${speedSeconds}s linear infinite` }}
           >
             {loop.map((src, idx) => (
               <div
                 key={idx}
-                className="shrink-0 rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:border-white/25 transition-colors"
+                className="shrink-0 rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
               >
                 <img
                   src={src}
                   alt="Resultado"
-                  className="h-[220px] md:h-[260px] w-auto object-contain"
+                  className="h-[210px] md:h-[260px] w-auto object-contain"
                   loading="lazy"
                 />
               </div>
@@ -70,13 +76,8 @@ export default function ResultsMarquee({
       <style>
         {`
           @keyframes marquee {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          @media (prefers-reduced-motion: reduce) {
-            div[style*="marquee"] {
-              animation: none !important;
-            }
+            0%   { transform: translate3d(0,0,0); }
+            100% { transform: translate3d(-50%,0,0); }
           }
         `}
       </style>
