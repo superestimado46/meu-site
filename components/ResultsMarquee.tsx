@@ -22,11 +22,11 @@ const fileNames = [
 ];
 
 // funciona no Vite/Netlify
-const getSrc = (name: string) => new URL(`../assets/results/${name}`, import.meta.url).href;
+const getSrc = (name: string) =>
+  new URL(`../assets/results/${name}`, import.meta.url).href;
 
 export default function ResultsMarquee({
   title = "Resultados Reais",
-  subtitle = "Mais de 1457 alunos já começaram com o Simpsons Cash",
   speedSeconds = 28,
 }: Props) {
   const images = fileNames.map(getSrc);
@@ -35,19 +35,28 @@ export default function ResultsMarquee({
   return (
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
+        
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-white">
             {title}
           </h2>
-          <p className="mt-3 text-gray-300">{subtitle}</p>
+
+          {/* subtitle melhorado */}
+          <p className="mt-3 text-gray-300 text-lg font-medium">
+            🔥 Mais de{" "}
+            <span className="text-simpson-yellow font-extrabold">
+              1457
+            </span>{" "}
+            alunos já começaram com o Simpsons Cash
+          </p>
         </div>
 
         <div className="relative overflow-hidden">
+
           {/* fade nas laterais */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-black to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-black to-transparent z-10" />
 
-          {/* ✅ min-w-max + flex-nowrap = mobile não “quebra” */}
           <div
             className="flex flex-nowrap w-max gap-6 items-center will-change-transform"
             style={{ animation: `marquee ${speedSeconds}s linear infinite` }}
@@ -71,6 +80,7 @@ export default function ResultsMarquee({
         <p className="text-center text-sm text-gray-500 mt-6">
           Esses são apenas alguns dos resultados. Novos alunos estão entrando todos os dias.
         </p>
+
       </div>
 
       <style>
