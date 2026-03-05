@@ -1,262 +1,372 @@
-import React, { useEffect, useState } from 'react';
-import { Check, MessageCircle, Star, Users, Rocket, Zap, Trophy } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from "react";
+import { Check, MessageCircle, Star, Users, Rocket, Zap } from "lucide-react";
 
 const prices = {
-  basic: { old: 97.90, current: 39.97 },
-  premium: { old: 197.90, current: 97.90 },
-  ultra: { old: 997.90, current: 497.90 }
+  basic: { old: 97.9, current: 39.97 },
+  premium: { old: 197.9, current: 97.9 },
+  ultra: { old: 997.9, current: 497.9 },
 };
 
-const calculateDiscount = (oldPrice: number, currentPrice: number) => {
-  return Math.round(((oldPrice - currentPrice) / oldPrice) * 100);
-};
-
-const formatPrice = (value: number) => {
-  return value.toFixed(2).replace('.', ',');
-};
+const formatPrice = (value: number) => value.toFixed(2).replace(".", ",");
 
 const Pricing: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState(86400);
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
 
+  // ✅ link do upsell (Plano 2 mais barato no pop-up)
+  const UPSELL_CHECKOUT_URL = "https://checkout.ticto.app/O2E011788";
+
+  // ✅ link do plano 1 (caso a pessoa recuse o upsell)
   const BASIC_CHECKOUT_URL = "https://checkout.ticto.app/OBF27819D";
-  const UPSELL_PREMIUM_URL = "https://checkout.ticto.app/O2E011788";
 
-  useEffect(() => {
-    const storedEnd = localStorage.getItem("offerEnd");
-    let endTime = storedEnd ? parseInt(storedEnd) : Date.now() + 86400000;
+  // ✅ preço especial do pop-up
+  const UPSELL_PRICE = 59.9;
 
-    if (!storedEnd) {
-      localStorage.setItem("offerEnd", endTime.toString());
-    }
+  // ✅ contador (por sessão) dentro do pop-up
+  const UPSELL_SECONDS = 10 * 60; // 10 minutos
+  const [upsellTimeLeft, setUpsellTimeLeft] = useState(UPSELL_SECONDS);
 
-    const interval = setInterval(() => {
-      const remaining = Math.floor((endTime - Date.now()) / 1000);
-
-      if (remaining <= 0) {
-        const newEnd = Date.now() + 86400000;
-        localStorage.setItem("offerEnd", newEnd.toString());
-        endTime = newEnd;
-        setTimeLeft(86400);
-      } else {
-        setTimeLeft(remaining);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
+  const savings = useMemo(() => {
+    const diff = prices.premium.current - UPSELL_PRICE; // 97,90 - 59,90 = 38,00
+    return diff > 0 ? diff : 0;
   }, []);
 
-  const hours = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
-  const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, '0');
-  const seconds = String(timeLeft % 60).padStart(2, '0');
+  // Fecha com ESC
+  useEffect(() => {
+    if (!isUpsellOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsUpsellOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isUpsellOpen]);
+
+  // Timer do pop-up (usa localStorage para manter se recarregar)
+  useEffect(() => {
+    if (!isUpsellOpen) return;
+
+    const key = "upsellEndTime_v1";
+    const now = Date.now();
+
+    let endTime = Number(localStorage.getItem(key) || 0);
+    if (!endTime || endTime < now) {
+      endTime = now + UPSELL_SECONDS * 1000;
+      localStorage.setItem(key, String(endTime));
+    }
+
+    const tick = () => {
+      const remaining = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
+      setUpsellTimeLeft(remaining);
+      if (remaining <= 0) {
+        localStorage.removeItem(key);
+        setIsUpsellOpen(false);
+      }
+    };
+
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, [isUpsellOpen]);
+
+  const mm = String(Math.floor(upsellTimeLeft / 60)).padStart(2, "0");
+  const ss = String(upsellTimeLeft % 60).padStart(2, "0");
 
   return (
     <section id="oferta" className="py-24 bg-black relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-7xl mx-auto items-stretch">
+          {/* PLANO 1 */}
+          <div className="pricing-card bg-gradient-to-br from-[#0f172a] to-[#020617] border border-gray-800 rounded-2xl p-8 flex flex-col">
+            <h3 className="text-xl font-bold text-gray-200">Apenas o Curso</h3>
 
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-            Oferta por Tempo Limitado
-          </h2>
-          <p className="text-red-400 font-bold text-lg">
-            ⏳ Essa condição especial termina em:
-          </p>
-          <div className="text-3xl md:text-4xl font-extrabold text-yellow-400 mt-2 tracking-widest">
-            {hours}:{minutes}:{seconds}
-          </div>
-        </div>
+            <p className="text-gray-400 text-sm mt-2">
+              Para quem quer aprender sozinho
+            </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-center">
-          
-          {/* --- OFFER 1: BASIC --- */}
-          <div className="w-full bg-gray-900 rounded-2xl p-6 lg:p-8 border border-gray-800 flex flex-col h-full hover:border-gray-600 transition-colors">
-            <div className="mb-6">
-              <h3 className="text-xl font-bold text-gray-300">Apenas o Curso</h3>
-              <p className="text-sm text-gray-500 mt-2">Para quem quer aprender sozinho</p>
-              <div className="mt-4 flex items-baseline flex-wrap gap-y-2">
-                <span className="text-sm text-gray-500 line-through mr-2">R$ {formatPrice(prices.basic.old)}</span>
-                <span className="text-4xl font-bold text-white">R$ {formatPrice(prices.basic.current)}</span>
-                <span className="ml-3 text-xs font-bold text-green-400">
-                  {calculateDiscount(prices.basic.old, prices.basic.current)}% OFF
-                </span>
-              </div>
+            <div className="mt-6">
+              <p className="text-gray-500 line-through text-sm">
+                R$ {formatPrice(prices.basic.old)}
+              </p>
+
+              <p className="text-4xl font-bold text-white mt-1">
+                R$ {formatPrice(prices.basic.current)}
+              </p>
             </div>
-            
-            <ul className="space-y-4 mb-8 flex-1">
-              <li className="flex items-center gap-3 text-gray-400">
-                <Check size={18} className="text-gray-500 flex-shrink-0" />
-                <span className="text-sm">Curso Completo Simpsons Cash</span>
+
+            <ul className="mt-8 space-y-4 flex-1 text-gray-300">
+              <li className="flex items-center gap-3">
+                <Check size={18} />
+                Curso Completo Simpsons Cash
               </li>
-              <li className="flex items-center gap-3 text-gray-400">
-                <Check size={18} className="text-gray-500 flex-shrink-0" />
-                <span className="text-sm">Acesso Vitalício</span>
+
+              <li className="flex items-center gap-3">
+                <Check size={18} />
+                Acesso Vitalício
               </li>
             </ul>
 
+            {/* ✅ Abre o pop-up em vez de ir direto pro checkout */}
             <button
               type="button"
               onClick={() => setIsUpsellOpen(true)}
-              className="w-full py-3 rounded-xl border border-gray-600 text-white font-bold hover:bg-gray-800 transition-colors text-sm md:text-base text-center block"
+              className="mt-8 border border-gray-600 text-white text-center py-3 rounded-xl hover:bg-gray-800 transition"
             >
               Quero apenas o curso
             </button>
           </div>
 
-          {/* --- OFFER 2: PREMIUM (fix do botão) --- */}
-          <div className="w-full bg-gray-800 rounded-2xl p-6 lg:p-8 border-2 border-yellow-400 flex flex-col transform lg:scale-110 relative z-20 h-full">
-            <div className="mb-6 mt-2">
-              <h3 className="text-2xl font-bold text-yellow-400 flex items-center gap-2">
-                 Completo + Comunidade
-                 <Star size={20} fill="currentColor" />
-              </h3>
-              <p className="text-sm text-gray-400 mt-2">Acelere seus resultados com o grupo</p>
-              <div className="mt-4 flex items-baseline flex-wrap gap-y-2">
-                <span className="text-sm text-gray-500 line-through mr-2">R$ {formatPrice(prices.premium.old)}</span>
-                <span className="text-5xl font-bold text-white">R$ {formatPrice(prices.premium.current)}</span>
-                <span className="ml-3 text-xs font-bold text-green-400">
-                  {calculateDiscount(prices.premium.old, prices.premium.current)}% OFF
-                </span>
-              </div>
+          {/* PLANO 2 */}
+          <div className="pricing-card relative bg-gradient-to-br from-[#1e293b] to-[#0f172a] border-2 border-yellow-400 rounded-2xl p-8 flex flex-col scale-105">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-xs font-bold px-4 py-1 rounded-full">
+              MAIS VENDIDO
             </div>
-            
-            <ul className="space-y-4 mb-8 flex-1">
-              <li className="flex items-center gap-3 text-white">
-                <Users size={16} />
-                <span className="text-sm">Grupo VIP no WhatsApp</span>
+
+            <h3 className="text-2xl font-bold text-yellow-400 flex items-center gap-2">
+              Completo + Comunidade
+              <Star size={20} fill="currentColor" />
+            </h3>
+
+            <p className="text-gray-400 mt-2">
+              Acelere seus resultados com o grupo
+            </p>
+
+            <div className="mt-6">
+              <p className="text-gray-500 line-through text-sm">
+                R$ {formatPrice(prices.premium.old)}
+              </p>
+
+              <p className="text-5xl font-bold text-white mt-1">
+                R$ {formatPrice(prices.premium.current)}
+              </p>
+            </div>
+
+            <ul className="mt-8 space-y-4 flex-1 text-gray-200">
+              <li className="flex items-center gap-3">
+                <Users size={18} />
+                Curso Completo Simpsons Cash
               </li>
-              <li className="flex items-center gap-3 text-white">
-                <Check size={16} />
-                <span className="text-sm">Network com outros alunos</span>
+
+              <li className="flex items-center gap-3 bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-lg">
+                <Users size={18} className="text-green-400" />
+                <span className="text-green-400 font-bold">
+                  BÔNUS: Grupo VIP no WhatsApp
+                </span>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <Check size={18} />
+                Network com outros alunos
+              </li>
+
+              <li className="flex items-center gap-3">
+                <Check size={18} />
+                Pack Ferramentas PRO
               </li>
             </ul>
 
-            <a 
+            <a
               href="https://checkout.ticto.app/O33C97F03"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold text-lg shadow-lg transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 text-center"
+              className="mt-8 bg-yellow-400 text-black font-bold text-center py-4 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
             >
               <MessageCircle size={20} />
-              <span>Quero Acesso + Grupo VIP</span>
+              Quero Acesso + Grupo VIP
             </a>
           </div>
 
-          {/* --- OFFER 3: ULTRA (fix do brilho no hover) --- */}
-          <div className="w-full bg-gray-900 rounded-2xl p-6 lg:p-8 border border-gray-700 flex flex-col h-full">
-            <div className="mb-6">
-              <h3 className="text-xl font-bold text-white">Kit Acelerador</h3>
-              <p className="text-sm text-gray-400 mt-2">Comece já com tudo pronto</p>
-              <div className="mt-4 flex items-baseline flex-wrap gap-y-2">
-                <span className="text-sm text-gray-500 line-through mr-2">R$ {formatPrice(prices.ultra.old)}</span>
-                <span className="text-4xl font-bold text-white">R$ {formatPrice(prices.ultra.current)}</span>
-                <span className="ml-3 text-xs font-bold text-green-400">
-                  {calculateDiscount(prices.ultra.old, prices.ultra.current)}% OFF
-                </span>
-              </div>
+          {/* PLANO 3 */}
+          <div className="pricing-card bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#3b0a1a] border border-gray-700 rounded-2xl p-8 flex flex-col">
+            <div className="inline-flex items-center gap-2 bg-pink-500/20 text-pink-400 text-xs font-bold px-3 py-1 rounded-full w-fit">
+              ALTA DEMANDA
             </div>
 
-            <ul className="space-y-4 mb-8 flex-1">
-              <li className="flex items-center gap-3 text-gray-300">
-                <Rocket size={16} />
-                <span className="text-sm">Conta pronta para monetizar</span>
+            <h3 className="text-2xl font-bold text-cyan-300 mt-3">
+              Kit Acelerador
+            </h3>
+
+            <p className="text-gray-400">Comece já com tudo pronto</p>
+
+            <div className="mt-6">
+              <p className="text-gray-500 line-through text-sm">
+                R$ {formatPrice(prices.ultra.old)}
+              </p>
+
+              <p className="text-5xl font-bold text-cyan-300 mt-1">
+                R$ {formatPrice(prices.ultra.current)}
+              </p>
+            </div>
+
+            <ul className="mt-8 space-y-4 flex-1 text-gray-200">
+              <li className="flex items-center gap-3">
+                <Check size={18} />
+                Tudo do plano Comunidade
               </li>
-              <li className="flex items-center gap-3 text-gray-300">
-                <Star size={16} />
-                <span className="text-sm">Suporte Individual VIP</span>
+
+              <li className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-3 rounded-lg">
+                <Zap size={18} className="text-pink-400" />
+                <div>
+                  <p className="font-bold">1 CONTA MONETIZADA</p>
+                  <p className="text-xs text-gray-400">
+                    Pronta pra rodar e faturar
+                  </p>
+                </div>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <Rocket size={18} />
+                Pula a fase de validação
+              </li>
+
+              <li className="flex items-center gap-3">
+                <Star size={18} />
+                Suporte Individual VIP
               </li>
             </ul>
 
-            <a 
+            <a
               href="https://checkout.ticto.app/O357A9DD7"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 rounded-xl border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black font-bold transition-all text-sm md:text-base text-center
-                         hover:shadow-[0_0_28px_rgba(34,211,238,0.45)]"
+              className="mt-8 border border-cyan-400 text-cyan-300 text-center py-4 rounded-xl hover:bg-cyan-400 hover:text-black transition"
             >
               Quero Conta Monetizada
             </a>
           </div>
-
         </div>
       </div>
 
-{/* ✅ POP-UP (UPSELL) ao clicar no Plano 1 */}
-{isUpsellOpen && (
-  <div className="fixed inset-0 z-[999] flex items-center justify-center px-4" role="dialog" aria-modal="true">
-    {/* overlay */}
-    <div
-      className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-      onClick={() => setIsUpsellOpen(false)}
-    />
-
-    {/* modal */}
-    <div className="relative z-10 w-full max-w-md rounded-2xl border border-simpson-yellow/40 bg-gray-900 shadow-[0_0_60px_rgba(0,0,0,0.65)] overflow-hidden">
-      <div className="p-5 border-b border-white/10 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-simpson-yellow">
-            ⚠️ Oferta expira em breve
-          </p>
-          <h3 className="text-xl font-extrabold text-white mt-1">
-            Completo + Comunidade ⭐
-          </h3>
-          <p className="text-sm text-gray-300 mt-1">
-            Antes de ir no plano básico, aproveite esse desconto exclusivo.
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setIsUpsellOpen(false)}
-          className="text-white/70 hover:text-white text-2xl leading-none"
-          aria-label="Fechar"
+      {/* ✅ POP-UP (UPSELL) */}
+      {isUpsellOpen && (
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center px-4"
+          role="dialog"
+          aria-modal="true"
         >
-          ×
-        </button>
-      </div>
+          {/* overlay */}
+          <div
+            className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+            onClick={() => setIsUpsellOpen(false)}
+          />
 
-      <div className="p-5 max-h-[80vh] overflow-auto">
-        <div className="rounded-2xl border border-simpson-yellow/40 bg-gradient-to-b from-gray-800 to-gray-900 p-5">
-          <div className="inline-block bg-simpson-yellow text-black px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
-            Mais vendido
+          {/* modal */}
+          <div className="relative z-10 w-full max-w-md rounded-2xl border border-yellow-400/40 bg-gradient-to-br from-[#1e293b] to-[#0f172a] shadow-[0_0_60px_rgba(0,0,0,0.65)] overflow-hidden">
+            <div className="p-5 border-b border-white/10 flex items-start justify-between gap-4">
+              <div className="w-full">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-2 bg-yellow-400 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">
+                    Desbloqueado só hoje
+                  </span>
+
+                  <span className="inline-flex items-center bg-green-500/15 text-green-300 border border-green-500/25 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                    Economize R$ {formatPrice(savings)}
+                  </span>
+
+                  <span className="ml-auto inline-flex items-center bg-black/35 border border-white/10 text-white text-xs font-black px-3 py-1 rounded-full tracking-widest">
+                    ⏳ {mm}:{ss}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-extrabold text-white mt-3 flex items-center gap-2">
+                  Completo + Comunidade{" "}
+                  <Star size={18} fill="currentColor" className="text-yellow-300" />
+                </h3>
+
+                <p className="text-sm text-gray-300 mt-1">
+                  Antes de ir no plano básico, pega esse upgrade com desconto exclusivo.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsUpsellOpen(false)}
+                className="text-white/70 hover:text-white text-2xl leading-none"
+                aria-label="Fechar"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="p-5">
+              <div className="rounded-2xl border border-yellow-400/40 bg-black/20 p-5">
+                <div className="inline-block bg-yellow-400 text-black text-[10px] font-bold px-3 py-1 rounded-full">
+                  MAIS VENDIDO
+                </div>
+
+                <p className="text-gray-300 mt-3 text-sm">
+                  Acelere seus resultados com o grupo
+                </p>
+
+                <div className="mt-3 flex items-baseline gap-3 flex-wrap">
+                  <span className="text-sm text-gray-400 line-through">
+                    R$ {formatPrice(prices.premium.current)}
+                  </span>
+                  <span className="text-4xl font-black text-white">
+                    R$ {formatPrice(UPSELL_PRICE)}
+                  </span>
+                  <span className="text-xs text-yellow-200 font-bold bg-yellow-400/10 border border-yellow-400/20 px-2 py-1 rounded-lg">
+                    desbloqueio por tempo limitado
+                  </span>
+                </div>
+
+                <ul className="mt-4 space-y-2 text-sm text-gray-200">
+                  <li className="flex items-center gap-2">
+                    <Users size={16} className="text-yellow-300" />
+                    Curso Completo Simpsons Cash
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Users size={16} className="text-green-400" />
+                    <span className="text-green-400 font-bold">
+                      BÔNUS: Grupo VIP no WhatsApp
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check size={16} className="text-white" />
+                    Network com outros alunos
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check size={16} className="text-white" />
+                    Pack Ferramentas PRO
+                  </li>
+                </ul>
+
+                <a
+                  href={UPSELL_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 w-full bg-yellow-400 text-black font-black text-center py-4 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
+                >
+                  <MessageCircle size={20} />
+                  Sim! Quero o desconto de hoje
+                </a>
+
+                <a
+                  href={BASIC_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 w-full border border-white/20 text-white font-bold text-center py-3 rounded-xl hover:bg-white/5 transition block"
+                >
+                  Não, quero apenas o curso
+                </a>
+
+                <p className="text-center text-[11px] text-gray-400 mt-4">
+                  *Quando o tempo zerar, esse desconto some automaticamente.
+                </p>
+              </div>
+            </div>
           </div>
-
-          <p className="text-sm text-gray-300 mt-3">Acelere seus resultados com o grupo</p>
-
-          <div className="mt-3 flex items-baseline gap-3">
-            <span className="text-sm text-gray-400 line-through">R$ 97,90</span>
-            <span className="text-4xl font-black text-white">R$ 59,90</span>
-          </div>
-
-          <ul className="mt-4 space-y-2 text-sm text-gray-200">
-            <li>✅ Curso Completo Simpsons Cash</li>
-            <li>✅ BÔNUS: Grupo VIP no WhatsApp</li>
-            <li>✅ Network com outros alunos</li>
-            <li>✅ Pack Ferramentas PRO</li>
-          </ul>
-
-          <a
-            href={UPSELL_PREMIUM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 w-full py-4 rounded-xl bg-simpson-yellow hover:bg-yellow-300 text-black font-extrabold text-lg shadow-lg transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 text-center block"
-          >
-            Quero Acesso + Grupo VIP
-          </a>
-
-          <a
-            href={BASIC_CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 w-full py-3 rounded-xl border border-white/20 text-white font-bold hover:bg-white/5 transition-colors text-sm text-center block"
-          >
-            Não, quero apenas o curso
-          </a>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
 
+      <style>{`
+        .pricing-card{
+          transition: all 0.35s ease;
+        }
+
+        .pricing-card:hover{
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+      `}</style>
     </section>
   );
 };
