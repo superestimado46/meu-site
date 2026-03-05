@@ -26,7 +26,7 @@ const getSrc = (name: string) => new URL(`../assets/results/${name}`, import.met
 
 export default function ResultsMarquee({
   title = "Resultados Reais",
-  subtitle = "Mais de 800 alunos já começaram com o Simpsons Cash",
+  subtitle = "Mais de 1457 alunos já começaram com o Simpsons Cash",
   speedSeconds = 28,
 }: Props) {
   const images = fileNames.map(getSrc);
