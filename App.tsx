@@ -1,3 +1,4 @@
+import OfferTimer from "./components/OfferTimer";
 import React from 'react';
 import Hero from './components/Hero';
 import Proof from './components/Proof';
