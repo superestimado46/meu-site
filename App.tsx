@@ -25,6 +25,7 @@ function App() {
         <ProblemSolution />
         <Modules />
         <Bonuses />
+        <OfferTimer />
         <Pricing />
         <Guarantee />
         <Summary />
