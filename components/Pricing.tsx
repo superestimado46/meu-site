@@ -16,7 +16,6 @@ const formatPrice = (value: number) => {
 };
 
 const Pricing: React.FC = () => {
-
   return (
     <section id="oferta" className="py-24 bg-black relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
@@ -33,77 +32,60 @@ const Pricing: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-center">
 
           {/* BASIC */}
-          <div className="w-full bg-gray-900 rounded-2xl p-6 lg:p-8 border border-gray-800 flex flex-col h-full">
-
+          <div className="plan-card w-full bg-gray-900 rounded-2xl p-6 lg:p-8 border border-gray-800 flex flex-col h-full">
             <div className="mb-6">
-              <h3 className="text-xl font-bold text-gray-300">
-                Apenas o Curso
-              </h3>
-
-              <p className="text-sm text-gray-500 mt-2">
-                Para quem quer aprender sozinho
-              </p>
+              <h3 className="text-xl font-bold text-gray-300">Apenas o Curso</h3>
+              <p className="text-sm text-gray-500 mt-2">Para quem quer aprender sozinho</p>
 
               <div className="mt-4 flex items-baseline gap-2 flex-wrap">
-
                 <span className="text-sm text-gray-500 line-through">
                   R$ {formatPrice(prices.basic.old)}
                 </span>
-
                 <span className="text-4xl font-bold text-white">
                   R$ {formatPrice(prices.basic.current)}
                 </span>
-
                 <span className="text-xs font-bold text-green-400">
                   {calculateDiscount(prices.basic.old, prices.basic.current)}% OFF
                 </span>
-
               </div>
             </div>
 
             <ul className="space-y-4 mb-8 flex-1">
-
               <li className="flex items-center gap-3 text-gray-400">
                 <Check size={18} />
                 Curso Completo Simpsons Cash
               </li>
-
               <li className="flex items-center gap-3 text-gray-400">
                 <Check size={18} />
                 Acesso Vitalício
               </li>
-
             </ul>
 
             <a
               href="https://checkout.ticto.app/OBF27819D"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 rounded-xl border border-gray-600 text-white font-bold hover:bg-gray-800 text-center"
+              className="w-full py-3 rounded-xl border border-gray-600 text-white font-bold hover:bg-gray-800 text-center transition-colors"
             >
               Quero apenas o curso
             </a>
-
           </div>
 
           {/* PREMIUM */}
-          <div className="w-full bg-gray-800 rounded-2xl p-6 lg:p-8 border-2 border-yellow-400 flex flex-col transform lg:scale-110 relative overflow-hidden">
+          <div className="plan-card plan-card--premium w-full bg-gray-800 rounded-2xl p-6 lg:p-8 border-2 border-yellow-400 flex flex-col transform lg:scale-110 relative z-20 h-full overflow-visible">
 
-            {/* BORDA ANIMADA */}
-            <div className="absolute inset-0 premium-border pointer-events-none"></div>
+            {/* BORDA ANIMADA (contorno) */}
+            <div className="absolute inset-0 premium-border pointer-events-none rounded-2xl"></div>
 
-            {/* ESTRELA */}
-            <div className="absolute -top-3 -left-3 z-30">
-              <div className="premium-star w-10 h-10 flex items-center justify-center rounded-full shadow-lg">
-                ★
-              </div>
+            {/* ESTRELA 3D CAMALeÃO (sem fundo) */}
+            <div className="absolute -top-6 -left-6 z-30 pointer-events-none">
+              <span className="premium-star">★</span>
             </div>
 
             <div className="mb-6 relative z-10">
-
               <h3 className="text-2xl font-bold text-yellow-400 flex items-center gap-2">
                 Completo + Comunidade
-                <Star size={20} fill="currentColor"/>
+                <Star size={20} fill="currentColor" />
               </h3>
 
               <p className="text-sm text-gray-400 mt-2">
@@ -111,7 +93,6 @@ const Pricing: React.FC = () => {
               </p>
 
               <div className="mt-4 flex items-baseline gap-2 flex-wrap">
-
                 <span className="text-sm text-gray-500 line-through">
                   R$ {formatPrice(prices.premium.old)}
                 </span>
@@ -123,22 +104,18 @@ const Pricing: React.FC = () => {
                 <span className="text-xs font-bold text-green-400">
                   {calculateDiscount(prices.premium.old, prices.premium.current)}% OFF
                 </span>
-
               </div>
             </div>
 
             <ul className="space-y-4 mb-8 flex-1 relative z-10">
-
               <li className="flex items-center gap-3 text-white">
-                <Users size={16}/>
+                <Users size={16} />
                 Grupo VIP no WhatsApp
               </li>
-
               <li className="flex items-center gap-3 text-white">
-                <Check size={16}/>
+                <Check size={16} />
                 Network com outros alunos
               </li>
-
             </ul>
 
             <a
@@ -147,27 +124,18 @@ const Pricing: React.FC = () => {
               rel="noopener noreferrer"
               className="w-full py-4 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold text-lg shadow-lg transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 text-center relative z-10"
             >
-              <MessageCircle size={20}/>
+              <MessageCircle size={20} />
               Quero Acesso + Grupo VIP
             </a>
-
           </div>
 
           {/* ULTRA */}
-          <div className="w-full bg-gray-900 rounded-2xl p-6 lg:p-8 border border-gray-700 flex flex-col h-full">
-
+          <div className="plan-card w-full bg-gray-900 rounded-2xl p-6 lg:p-8 border border-gray-700 flex flex-col h-full">
             <div className="mb-6">
-
-              <h3 className="text-xl font-bold text-white">
-                Kit Acelerador
-              </h3>
-
-              <p className="text-sm text-gray-400 mt-2">
-                Comece já com tudo pronto
-              </p>
+              <h3 className="text-xl font-bold text-white">Kit Acelerador</h3>
+              <p className="text-sm text-gray-400 mt-2">Comece já com tudo pronto</p>
 
               <div className="mt-4 flex items-baseline gap-2 flex-wrap">
-
                 <span className="text-sm text-gray-500 line-through">
                   R$ {formatPrice(prices.ultra.old)}
                 </span>
@@ -179,74 +147,96 @@ const Pricing: React.FC = () => {
                 <span className="text-xs font-bold text-green-400">
                   {calculateDiscount(prices.ultra.old, prices.ultra.current)}% OFF
                 </span>
-
               </div>
             </div>
 
             <ul className="space-y-4 mb-8 flex-1">
-
               <li className="flex items-center gap-3 text-gray-300">
-                <Rocket size={16}/>
+                <Rocket size={16} />
                 Conta pronta para monetizar
               </li>
-
               <li className="flex items-center gap-3 text-gray-300">
-                <Star size={16}/>
+                <Star size={16} />
                 Suporte Individual VIP
               </li>
-
             </ul>
 
             <a
               href="https://checkout.ticto.app/O357A9DD7"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 rounded-xl border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black font-bold text-center"
+              className="w-full py-3 rounded-xl border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black font-bold text-center transition-all"
             >
               Quero Conta Monetizada
             </a>
-
           </div>
 
         </div>
-
       </div>
 
       <style>{`
+        /* Hover suave em TODOS os cards */
+        .plan-card{
+          transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
+          will-change: transform;
+        }
+        .plan-card:hover{
+          transform: translateY(-6px) scale(1.01);
+        }
 
-      .premium-border{
-        border-radius:16px;
-        padding:2px;
-        background:linear-gradient(270deg,#ffcc00,#00ffff,#ff00ff,#00ff88,#ffcc00);
-        background-size:600% 600%;
-        animation:borderFlow 6s ease infinite;
-        mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-        mask-composite:exclude;
-      }
+        /* Premium já tem scale no desktop, então usamos hover sem "quebrar" o scale */
+        @media (min-width: 1024px){
+          .plan-card--premium:hover{
+            transform: translateY(-6px) scale(1.12);
+          }
+        }
 
-      .premium-star{
-        font-size:18px;
-        font-weight:bold;
-        color:white;
-        background:linear-gradient(270deg,#ffcc00,#00ffff,#ff00ff,#00ff88,#ffcc00);
-        background-size:600% 600%;
-        animation:starFlow 6s ease infinite;
-      }
+        /* Borda animada contornando o card */
+        .premium-border{
+          border-radius: 16px;
+          padding: 2px;
+          background: linear-gradient(270deg, #ffcc00, #00ffff, #ff00ff, #00ff88, #ffcc00);
+          background-size: 600% 600%;
+          animation: borderFlow 6.5s ease infinite;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+          opacity: 0.9;
+        }
 
-      @keyframes borderFlow{
-        0%{background-position:0% 50%;}
-        50%{background-position:100% 50%;}
-        100%{background-position:0% 50%;}
-      }
+        /* Estrela 3D camaleão, sem fundo */
+        .premium-star{
+          display: inline-block;
+          font-size: 40px;
+          line-height: 1;
+          font-weight: 900;
+          background: linear-gradient(270deg, #ffcc00, #00ffff, #ff00ff, #00ff88, #ffcc00);
+          background-size: 600% 600%;
+          animation: starFlow 6.5s ease infinite;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
 
-      @keyframes starFlow{
-        0%{background-position:0% 50%;}
-        50%{background-position:100% 50%;}
-        100%{background-position:0% 50%;}
-      }
+          /* “3D” (sombra + highlight) */
+          text-shadow:
+            0 2px 0 rgba(0,0,0,0.35),
+            0 6px 16px rgba(0,0,0,0.55),
+            1px 1px 0 rgba(255,255,255,0.12);
+          transform: rotate(-10deg);
+          filter: drop-shadow(0 10px 18px rgba(0,0,0,0.55));
+        }
 
+        @keyframes borderFlow{
+          0%{ background-position: 0% 50%; }
+          50%{ background-position: 100% 50%; }
+          100%{ background-position: 0% 50%; }
+        }
+
+        @keyframes starFlow{
+          0%{ background-position: 0% 50%; }
+          50%{ background-position: 100% 50%; }
+          100%{ background-position: 0% 50%; }
+        }
       `}</style>
-
     </section>
   );
 };
