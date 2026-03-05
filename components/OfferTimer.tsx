@@ -27,7 +27,7 @@ const OfferTimer: React.FC = () => {
 {/* Mensagem de escassez abaixo do timer */}
 <div className="mt-3 text-center leading-relaxed">
   <p className="text-yellow-300 text-sm md:text-base font-bold animate-pulse">
-    ⚠️ Restam apenas 12 vagas com esse desconto
+     RESTAM APENAS 12 VAGAS COM ESSE DESCONTO
   </p>
 
   <p className="text-white/80 text-xs md:text-sm mt-1">
