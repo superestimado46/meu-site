@@ -19,16 +19,25 @@ function App() {
         {/* HERO */}
         <Hero />
 
-        {/* RESULTADOS REAIS (nova seção com carrossel) */}
+        {/* RESULTADOS REAIS */}
         <Proof />
 
         {/* RESTO DA PÁGINA */}
         <ProblemSolution />
         <Modules />
         <Bonuses />
+
+        {/* OFERTA */}
         <OfferTimer />
         <Pricing />
+
+        {/* FAQ */}
+        <FAQ />
+
+        {/* GARANTIA */}
         <Guarantee />
+
+        {/* RESUMO FINAL */}
         <Summary />
       </main>
 
