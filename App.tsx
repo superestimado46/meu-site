@@ -1,6 +1,5 @@
 import React from 'react';
 import Hero from './components/Hero';
-import ResultsMarquee from './components/ResultsMarquee';
 import Proof from './components/Proof';
 import ProblemSolution from './components/ProblemSolution';
 import Modules from './components/Modules';
@@ -13,13 +12,15 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div className="min-h-screen bg-tiktok-black font-sans antialiased text-white selection:bg-simpson-yellow selection:text-black">
+      
       <main>
+        {/* HERO */}
         <Hero />
 
-        {/* NOVA SEÇÃO DE RESULTADOS */}
-        <ResultsMarquee />
-
+        {/* RESULTADOS REAIS (nova seção com carrossel) */}
         <Proof />
+
+        {/* RESTO DA PÁGINA */}
         <ProblemSolution />
         <Modules />
         <Bonuses />
@@ -27,8 +28,9 @@ function App() {
         <Guarantee />
         <Summary />
       </main>
+
       <Footer />
-      
+
       {/* Sticky Mobile CTA */}
       <div className="fixed bottom-0 left-0 w-full p-4 bg-black/90 backdrop-blur border-t border-gray-800 z-50 md:hidden">
         <button 
@@ -38,6 +40,7 @@ function App() {
           QUERO COMEÇAR AGORA
         </button>
       </div>
+
     </div>
   );
 }
