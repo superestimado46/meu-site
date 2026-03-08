@@ -9,22 +9,26 @@ const testimonials = [
 ];
 
 export default function TestimonialsMarquee() {
-const loop = [...testimonials, ...testimonials];
+const items = [...testimonials, ...testimonials];
 
-return ( <section className="py-12 bg-black overflow-hidden"> <h2 className="text-center text-2xl font-bold mb-8">
-Mensagens de alunos </h2>
+return ( <section className="py-12 bg-black overflow-hidden">
 
 ```
-  <div className="flex gap-6 animate-marquee whitespace-nowrap">
-    {loop.map((img, index) => (
+  <h2 className="text-center text-2xl font-bold mb-8">
+    Mensagens de alunos
+  </h2>
+
+  <div className="flex gap-6 animate-marquee-reverse whitespace-nowrap">
+    {items.map((img, index) => (
       <img
         key={index}
         src={img}
-        alt="Depoimento de aluno"
+        alt="Depoimento"
         className="h-80 rounded-xl shadow-lg"
       />
     ))}
   </div>
+
 </section>
 ```
 
