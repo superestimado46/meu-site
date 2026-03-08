@@ -23,7 +23,7 @@ export default function TestimonialsMarquee() {
           display: flex;
           gap: 24px;
           width: max-content;
-          animation: testimonialsReverse 20s linear infinite;
+          animation: testimonialsReverse 15s linear infinite;
         }
 
         @keyframes testimonialsReverse {
