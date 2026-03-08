@@ -1,30 +1,34 @@
 import React from "react";
 
 const testimonials = [
-  "/assets/testimonials/test1.webp",
-  "/assets/testimonials/test2.webp",
-  "/assets/testimonials/test3.webp",
-  "/assets/testimonials/test4.webp",
+"/assets/testimonials/test1.png",
+"/assets/testimonials/test2.png",
+"/assets/testimonials/test3.png",
+"/assets/testimonials/test4.png",
+"/assets/testimonials/test5.png",
 ];
 
 export default function TestimonialsMarquee() {
-  return (
-    <section className="py-10 bg-black overflow-hidden">
-      
-      <h2 className="text-center text-2xl font-bold mb-6">
-        Mensagens de alunos
-      </h2>
+return ( <section className="py-12 bg-black overflow-hidden">
 
-      <div className="flex gap-6 justify-center flex-wrap">
-        {testimonials.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            className="h-64 rounded-xl shadow-lg"
-          />
-        ))}
-      </div>
+```
+  <h2 className="text-center text-2xl font-bold mb-8">
+    Mensagens de alunos
+  </h2>
 
-    </section>
-  );
+  <div className="flex gap-6 justify-center flex-wrap">
+    {testimonials.map((img, index) => (
+      <img
+        key={index}
+        src={img}
+        alt="Depoimento de aluno"
+        className="h-80 rounded-xl shadow-lg"
+      />
+    ))}
+  </div>
+
+</section>
+```
+
+);
 }
