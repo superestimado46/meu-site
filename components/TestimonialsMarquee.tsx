@@ -18,13 +18,13 @@ return ( <section className="py-12 bg-black overflow-hidden">
     Mensagens de alunos
   </h2>
 
-  <div className="flex gap-6 animate-marquee-reverse whitespace-nowrap">
+  <div className="animate-marquee-reverse gap-6 whitespace-nowrap">
     {items.map((img, index) => (
       <img
         key={index}
         src={img}
         alt="Depoimento"
-        className="h-80 rounded-xl shadow-lg"
+        className="h-80 rounded-xl shadow-lg flex-shrink-0"
       />
     ))}
   </div>
