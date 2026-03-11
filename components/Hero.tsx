@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
 
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-simpson-yellow/10 border border-simpson-yellow/30 text-simpson-yellow font-bold text-sm uppercase tracking-wide backdrop-blur-sm">
               <DollarSign size={16} />
-              <span>Simpsons Cash</span>
+              <span>Storm Clips</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold leading-tight">
@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
             </h1>
 
             <p className="text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-              O caminho comprovado para faturar no TikTok usando apenas vídeos dos Simpsons, mesmo começando do zero e sem aparecer.
+              O caminho comprovado para faturar no TikTok usando vídeos virais, mesmo começando do zero e sem aparecer.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
 
                 <img
                   src={IMAGES.hero}
-                  alt="Simpsons Cash Viral"
+                  alt="Storm Clips Viral"
                   className="w-full h-full object-cover"
                 />
 
