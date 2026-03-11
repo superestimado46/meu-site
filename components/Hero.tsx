@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { DollarSign, ArrowRight, TrendingUp, BarChart3, Play } from 'lucide-react';
+import { DollarSign, ArrowRight, TrendingUp, BarChart3, Play, CheckCircle } from 'lucide-react';
 import { SCROLL_TO_OFFER, IMAGES } from '../constants';
 
 const Hero: React.FC = () => {
@@ -27,7 +27,6 @@ const Hero: React.FC = () => {
       <div className="absolute top-0 right-0 -translate-x-1/4 translate-y-1/4 w-96 h-96 bg-simpson-yellow/10 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-8">
@@ -38,42 +37,64 @@ const Hero: React.FC = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold leading-tight">
-              O método mais <span className="text-simpson-yellow relative inline-block">
-                simples
-                <svg className="absolute w-full h-3 -bottom-1 left-0 text-simpson-yellow opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+              Aprenda a criar páginas de{' '}
+              <span className="text-simpson-yellow relative inline-block">
+                clipes virais
+                <svg
+                  className="absolute w-full h-3 -bottom-1 left-0 text-simpson-yellow opacity-60"
+                  viewBox="0 0 100 10"
+                  preserveAspectRatio="none"
+                >
                   <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
                 </svg>
-              </span> do TikTok
+              </span>{' '}
+              no TikTok sem aparecer
             </h1>
 
             <p className="text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-              O caminho comprovado para faturar no TikTok usando vídeos virais, mesmo começando do zero e sem aparecer.
+              Descubra o método para montar páginas estratégicas, postar vídeos com alto potencial de retenção e transformar visualizações em uma fonte de renda, mesmo começando do zero.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+            <div className="grid gap-3 max-w-2xl mx-auto lg:mx-0">
+              <div className="flex items-center gap-3 text-left justify-center lg:justify-start">
+                <CheckCircle size={18} className="text-simpson-yellow shrink-0" />
+                <span className="text-gray-200">Sem precisar aparecer</span>
+              </div>
 
+              <div className="flex items-center gap-3 text-left justify-center lg:justify-start">
+                <CheckCircle size={18} className="text-simpson-yellow shrink-0" />
+                <span className="text-gray-200">Mesmo sem experiência com edição</span>
+              </div>
+
+              <div className="flex items-center gap-3 text-left justify-center lg:justify-start">
+                <CheckCircle size={18} className="text-simpson-yellow shrink-0" />
+                <span className="text-gray-200">Usando um formato simples, rápido e replicável</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
               <button
                 onClick={SCROLL_TO_OFFER}
                 className="w-full sm:w-auto px-8 py-5 bg-simpson-yellow hover:bg-yellow-300 text-black font-black text-lg rounded-xl shadow-[0_0_25px_rgba(255,217,15,0.4)] transition-all transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-3"
               >
-                COMEÇAR AGORA
+                QUERO COMEÇAR AGORA
                 <ArrowRight size={24} />
               </button>
-
             </div>
+
+            <p className="text-sm text-gray-400">
+              Acesso imediato + método prático para começar ainda hoje.
+            </p>
           </div>
 
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative">
-
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-simpson-yellow/5 blur-[60px] rounded-full pointer-events-none animate-pulse-slow"></div>
 
             <div
               ref={parallaxRef}
               className="relative w-full max-w-md mx-auto z-10 will-change-transform"
             >
-
               <div className="relative rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(255,217,15,0.15)] border-[3px] border-simpson-yellow bg-black aspect-[3/4] transition-transform duration-500 ease-out hover:scale-[1.02] animate-float">
-
                 <img
                   src={IMAGES.hero}
                   alt="Storm Clips Viral"
@@ -93,7 +114,6 @@ const Hero: React.FC = () => {
 
                 <div className="absolute bottom-4 left-4 right-4 z-20">
                   <div className="bg-gray-900/95 backdrop-blur-xl p-3 rounded-xl border border-gray-700 shadow-xl flex items-center justify-between gap-3">
-
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center border border-gray-600">
                         <TrendingUp className="text-tiktok-cyan" size={20} />
@@ -117,13 +137,11 @@ const Hero: React.FC = () => {
                         <span>+15.4K</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
 
               </div>
             </div>
-
           </div>
 
         </div>
