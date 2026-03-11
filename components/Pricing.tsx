@@ -95,7 +95,7 @@ const Pricing: React.FC = () => {
             <ul className="mt-8 space-y-4 flex-1 text-gray-300">
               <li className="flex items-center gap-3">
                 <Check size={18} />
-                Curso Completo Simpsons Cash
+                Curso Completo Storm Clips
               </li>
 
               <li className="flex items-center gap-3">
@@ -104,7 +104,6 @@ const Pricing: React.FC = () => {
               </li>
             </ul>
 
-            {/* ✅ Abre o pop-up em vez de ir direto pro checkout */}
             <button
               type="button"
               onClick={() => setIsUpsellOpen(true)}
@@ -142,7 +141,7 @@ const Pricing: React.FC = () => {
             <ul className="mt-8 space-y-4 flex-1 text-gray-200">
               <li className="flex items-center gap-3">
                 <Users size={18} />
-                Curso Completo Simpsons Cash
+                Curso Completo Storm Clips
               </li>
 
               <li className="flex items-center gap-3 bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-lg">
@@ -235,20 +234,17 @@ const Pricing: React.FC = () => {
         </div>
       </div>
 
-      {/* ✅ POP-UP (UPSELL) */}
       {isUpsellOpen && (
         <div
           className="fixed inset-0 z-[999] flex items-center justify-center px-4"
           role="dialog"
           aria-modal="true"
         >
-          {/* overlay */}
           <div
             className="absolute inset-0 bg-black/75 backdrop-blur-sm"
             onClick={() => setIsUpsellOpen(false)}
           />
 
-          {/* modal */}
           <div className="relative z-10 w-full max-w-md rounded-2xl border border-yellow-400/40 bg-gradient-to-br from-[#1e293b] to-[#0f172a] shadow-[0_0_60px_rgba(0,0,0,0.65)] overflow-hidden">
             <div className="p-5 border-b border-white/10 flex items-start justify-between gap-4">
               <div className="w-full">
@@ -311,7 +307,7 @@ const Pricing: React.FC = () => {
                 <ul className="mt-4 space-y-2 text-sm text-gray-200">
                   <li className="flex items-center gap-2">
                     <Users size={16} className="text-yellow-300" />
-                    Curso Completo Simpsons Cash
+                    Curso Completo Storm Clips
                   </li>
                   <li className="flex items-center gap-2">
                     <Users size={16} className="text-green-400" />
