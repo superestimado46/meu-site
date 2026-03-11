@@ -3,7 +3,7 @@ import React from "react";
 type Props = {
   title?: string;
   subtitle?: string;
-  speedSeconds?: number; // quanto maior, mais lento
+  speedSeconds?: number;
 };
 
 const fileNames = [
@@ -21,14 +21,14 @@ const fileNames = [
   "result_12.webp",
 ];
 
-// funciona no Vite/Netlify
 const getSrc = (name: string) =>
   new URL(`../assets/results/${name}`, import.meta.url).href;
 
 export default function ResultsMarquee({
-  title = "Resultados Reais",
+  title = "Alguns resultados de alunos aplicando o Storm Clips",
   speedSeconds = 28,
 }: Props) {
+
   const images = fileNames.map(getSrc);
   const loop = [...images, ...images];
 
@@ -37,17 +37,16 @@ export default function ResultsMarquee({
       <div className="container mx-auto px-4">
         
         <div className="text-center mb-10">
+
           <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-white">
             {title}
           </h2>
 
-          <p className="mt-3 text-gray-300 text-lg font-medium">
-            🔥 Mais de{" "}
-            <span className="text-simpson-yellow font-extrabold">
-              1457
-            </span>{" "}
-            alunos já começaram com o Storm Clips
+          <p className="mt-4 text-gray-300 text-lg max-w-2xl mx-auto">
+            🔥 Mais de <span className="text-simpson-yellow font-extrabold">1457 alunos</span> já começaram 
+            a aplicar o método Storm Clips criando páginas de clipes virais no TikTok.
           </p>
+
         </div>
 
         <div className="relative overflow-hidden">
@@ -66,17 +65,19 @@ export default function ResultsMarquee({
               >
                 <img
                   src={src}
-                  alt="Resultado"
+                  alt="Resultado de aluno"
                   className="h-[210px] md:h-[260px] w-auto object-contain"
                   loading="lazy"
                 />
               </div>
             ))}
           </div>
+
         </div>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
-          Esses são apenas alguns dos resultados. Novos alunos estão entrando todos os dias.
+        <p className="text-center text-sm text-gray-500 mt-6 max-w-xl mx-auto">
+          Esses são apenas alguns resultados compartilhados por alunos que começaram 
+          a aplicar o método Storm Clips. Novas páginas e novos resultados aparecem todos os dias.
         </p>
 
       </div>
