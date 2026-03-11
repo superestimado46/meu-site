@@ -8,16 +8,15 @@ const ProblemSolution: React.FC = () => {
         
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
-            <span className="text-simpson-yellow">TikTok Dark 2.0:</span> Os Simpsons viraram uma máquina de dinheiro
+            <span className="text-simpson-yellow">TikTok Dark 2.0:</span> vídeos virais podem virar uma máquina de dinheiro
           </h2>
           <p className="text-gray-300 text-lg">
             Enquanto todo mundo tenta dançar, aparecer ou vender curso complicado… 
-            Tem gente postando cortes simples dos Simpsons e ganhando dinheiro todos os dias.
+            tem gente postando cortes simples e vídeos virais e ganhando dinheiro todos os dias.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {/* The Old Way */}
           <div className="bg-red-950/20 border border-red-900/50 rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-red-500 mb-6 flex items-center gap-2">
               <X size={28} />
@@ -35,7 +34,6 @@ const ProblemSolution: React.FC = () => {
             </ul>
           </div>
 
-          {/* The New Way */}
           <div className="bg-green-950/20 border border-green-900/50 rounded-2xl p-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-20 h-20 bg-green-500 blur-[50px] opacity-20"></div>
             <h3 className="text-2xl font-bold text-green-500 mb-6 flex items-center gap-2">
@@ -67,7 +65,7 @@ const ProblemSolution: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-white">O método certo</h4>
-                  <p className="text-sm text-gray-400">Simpsons Cash</p>
+                  <p className="text-sm text-gray-400">Storm Clips</p>
                 </div>
               </li>
             </ul>
@@ -78,8 +76,8 @@ const ProblemSolution: React.FC = () => {
           <h3 className="text-2xl font-bold text-white mb-2">Por que funciona?</h3>
           <p className="text-gray-300">
             Porque o TikTok <span className="text-simpson-yellow font-bold">AMA retenção</span>. 
-            E poucas coisas seguram mais atenção do que Simpsons.
-            Aqui, você usa conteúdo que já nasce viral.
+            E vídeos curtos com boa edição seguram atenção muito mais do que a maioria imagina.
+            Aqui, você usa conteúdo com forte potencial de viralização.
           </p>
         </div>
 
