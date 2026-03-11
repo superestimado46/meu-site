@@ -41,19 +41,17 @@ export default function ResultsMarquee({
             {title}
           </h2>
 
-          {/* subtitle melhorado */}
           <p className="mt-3 text-gray-300 text-lg font-medium">
             🔥 Mais de{" "}
             <span className="text-simpson-yellow font-extrabold">
               1457
             </span>{" "}
-            alunos já começaram com o Simpsons Cash
+            alunos já começaram com o Storm Clips
           </p>
         </div>
 
         <div className="relative overflow-hidden">
 
-          {/* fade nas laterais */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-black to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-black to-transparent z-10" />
 
