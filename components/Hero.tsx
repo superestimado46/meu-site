@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { DollarSign, ArrowRight, TrendingUp, BarChart3, Play, CheckCircle } from 'lucide-react';
-import { SCROLL_TO_OFFER, IMAGES } from '../constants';
+import { SCROLL_TO_OFFER } from '../constants';
 
 const Hero: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -92,53 +92,20 @@ const Hero: React.FC = () => {
 
             <div
               ref={parallaxRef}
-              className="relative w-full max-w-md mx-auto z-10 will-change-transform"
+              className="relative w-full max-w-sm mx-auto z-10 will-change-transform"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(255,217,15,0.15)] border-[3px] border-simpson-yellow bg-black aspect-[3/4] transition-transform duration-500 ease-out hover:scale-[1.02] animate-float">
-                <img
-                  src={IMAGES.hero}
-                  alt="Storm Clips Viral"
-                  className="w-full h-full object-cover"
-                />
+              <div className="relative rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(255,217,15,0.15)] border-[3px] border-simpson-yellow bg-black aspect-[9/16] transition-transform duration-500 ease-out hover:scale-[1.02] animate-float">
+
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/iYzzwjV4jgc?autoplay=1&mute=1&controls=0&rel=0&playsinline=1"
+                  title="VSL"
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                ></iframe>
 
                 <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.5)] pointer-events-none z-10"></div>
-
-                <div className="absolute top-4 left-4 z-20">
-                  <div className="bg-black/60 backdrop-blur-md border border-gray-700 rounded-lg px-3 py-1.5 flex items-center gap-2">
-                    <div className="bg-red-500 rounded-full p-1">
-                      <Play size={10} fill="white" className="text-white ml-0.5" />
-                    </div>
-                    <span className="text-xs font-bold text-white">Alta Retenção</span>
-                  </div>
-                </div>
-
-                <div className="absolute bottom-4 left-4 right-4 z-20">
-                  <div className="bg-gray-900/95 backdrop-blur-xl p-3 rounded-xl border border-gray-700 shadow-xl flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center border border-gray-600">
-                        <TrendingUp className="text-tiktok-cyan" size={20} />
-                      </div>
-
-                      <div>
-                        <p className="text-gray-400 text-[10px] font-medium uppercase tracking-wider">
-                          Performance
-                        </p>
-                        <p className="text-white font-bold text-base leading-none mt-0.5">
-                          Viralizou 🔥
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="h-6 w-[1px] bg-gray-700"></div>
-
-                    <div className="flex flex-col items-end">
-                      <div className="flex items-center gap-1 text-green-400 text-xs font-bold">
-                        <BarChart3 size={14} />
-                        <span>+15.4K</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
               </div>
             </div>
