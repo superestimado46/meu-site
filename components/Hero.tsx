@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { DollarSign, ArrowRight, TrendingUp, BarChart3, Play, CheckCircle } from 'lucide-react';
+import { DollarSign, ArrowRight, CheckCircle } from 'lucide-react';
 import { SCROLL_TO_OFFER } from '../constants';
 
 const Hero: React.FC = () => {
@@ -23,14 +23,11 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-tiktok-black to-gray-900 pt-24 pb-16 lg:pt-36 lg:pb-24">
-      
       <div className="absolute top-0 right-0 -translate-x-1/4 translate-y-1/4 w-96 h-96 bg-simpson-yellow/10 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-8">
-
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-simpson-yellow/10 border border-simpson-yellow/30 text-simpson-yellow font-bold text-sm uppercase tracking-wide backdrop-blur-sm">
               <DollarSign size={16} />
               <span>Storm Clips</span>
@@ -95,10 +92,9 @@ const Hero: React.FC = () => {
               className="relative w-full max-w-sm mx-auto z-10 will-change-transform"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(255,217,15,0.15)] border-[3px] border-simpson-yellow bg-black aspect-[9/16] transition-transform duration-500 ease-out hover:scale-[1.02] animate-float">
-
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/iYzzwjV4jgc?autoplay=1&mute=1&controls=0&rel=0&playsinline=1"
+                  src="https://www.youtube.com/embed/iYzzwjV4jgc?controls=1&rel=0&playsinline=1"
                   title="VSL"
                   frameBorder="0"
                   allow="autoplay; encrypted-media"
@@ -106,11 +102,9 @@ const Hero: React.FC = () => {
                 ></iframe>
 
                 <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.5)] pointer-events-none z-10"></div>
-
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
