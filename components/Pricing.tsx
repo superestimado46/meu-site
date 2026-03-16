@@ -13,10 +13,10 @@ const Pricing: React.FC = () => {
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
 
   // ✅ link do upsell (Plano 2 mais barato no pop-up)
-  const UPSELL_CHECKOUT_URL = "https://checkout.ticto.app/O2E011788";
+  const UPSELL_CHECKOUT_URL = "https://checkout.ticto.app/O454C8D0C";
 
   // ✅ link do plano 1 (caso a pessoa recuse o upsell)
-  const BASIC_CHECKOUT_URL = "https://checkout.ticto.app/OBF27819D";
+  const BASIC_CHECKOUT_URL = "https://checkout.ticto.app/OECD58110";
 
   // ✅ preço especial do pop-up
   const UPSELL_PRICE = 59.9;
@@ -163,7 +163,7 @@ const Pricing: React.FC = () => {
             </ul>
 
             <a
-              href="https://checkout.ticto.app/O33C97F03"
+              href="https://checkout.ticto.app/O5A79A605"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 bg-yellow-400 text-black font-bold text-center py-4 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
@@ -223,7 +223,7 @@ const Pricing: React.FC = () => {
             </ul>
 
             <a
-              href="https://checkout.ticto.app/O357A9DD7"
+              href="https://checkout.ticto.app/ODA540CFB"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 border border-cyan-400 text-cyan-300 text-center py-4 rounded-xl hover:bg-cyan-400 hover:text-black transition"
