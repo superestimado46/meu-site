@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-center leading-tight max-w-3xl">
             Assista ao vídeo curto de{" "}
             <span className="text-simpson-yellow text-4xl sm:text-5xl lg:text-6xl drop-shadow-[0_0_12px_rgba(255,217,15,0.8)]">
-              2 minutos
+              1 minuto
             </span>{" "}
             abaixo antes de continuar rolando
           </h1>
