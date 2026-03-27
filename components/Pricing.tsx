@@ -9,6 +9,12 @@ const prices = {
 
 const formatPrice = (value: number) => value.toFixed(2).replace(".", ",");
 
+const trackInitiateCheckout = () => {
+  if (typeof window !== "undefined" && (window as any).fbq) {
+    (window as any).fbq("track", "InitiateCheckout");
+  }
+};
+
 const Pricing: React.FC = () => {
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
 
@@ -166,6 +172,7 @@ const Pricing: React.FC = () => {
               href="https://checkout.ticto.app/O5A79A605"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackInitiateCheckout}
               className="mt-8 bg-yellow-400 text-black font-bold text-center py-4 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
             >
               <MessageCircle size={20} />
@@ -226,6 +233,7 @@ const Pricing: React.FC = () => {
               href="https://checkout.ticto.app/ODA540CFB"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackInitiateCheckout}
               className="mt-8 border border-cyan-400 text-cyan-300 text-center py-4 rounded-xl hover:bg-cyan-400 hover:text-black transition"
             >
               Quero Conta Monetizada
@@ -329,6 +337,7 @@ const Pricing: React.FC = () => {
                   href={UPSELL_CHECKOUT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={trackInitiateCheckout}
                   className="mt-5 w-full bg-yellow-400 text-black font-black text-center py-4 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
                 >
                   <MessageCircle size={20} />
@@ -339,6 +348,7 @@ const Pricing: React.FC = () => {
                   href={BASIC_CHECKOUT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={trackInitiateCheckout}
                   className="mt-3 w-full border border-white/20 text-white font-bold text-center py-3 rounded-xl hover:bg-white/5 transition block"
                 >
                   Não, quero apenas o curso
